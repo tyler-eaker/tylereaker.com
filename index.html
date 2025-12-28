@@ -79,7 +79,7 @@
                 
                 <div class="w-full md:w-1/3 flex justify-center">
                     <div class="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl ring-1 ring-slate-200 dark:ring-slate-700">
-                        <img src="profile.png" alt="Tyler Eaker" class="w-full h-full object-cover">
+                        <img src="profile.png?v=2" alt="Tyler Eaker" class="w-full h-full object-cover">
                     </div>
                 </div>
                 
@@ -130,8 +130,29 @@
             <div class="grid md:grid-cols-2 gap-8 items-stretch">
                 
                 <div class="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
-                    <div class="aspect-[16/7] overflow-hidden bg-indigo-950">
-                        <img src="voxelbyte.png" alt="VoxelByte Engine" class="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+                    <div class="aspect-[16/7] w-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center relative overflow-hidden group">
+                        
+                        <div class="absolute inset-0 p-4 opacity-10 dark:opacity-20 font-mono text-[10px] leading-tight text-indigo-700 dark:text-indigo-400 select-none pointer-events-none whitespace-pre-wrap">
+void Chunk::generateMesh() {
+  for (int x = 0; x < CHUNK_SIZE; x++) {
+    for (int y = 0; y < CHUNK_HEIGHT; y++) {
+      if (blocks[x][y].isActive) {
+        addFace(TOP, x, y);
+        addFace(BOTTOM, x, y);
+        // Optimize mesh generation
+        updateBuffer();
+      }
+    }
+  }
+}
+                        </div>
+                        
+                        <div class="relative z-10 flex flex-col items-center justify-center group-hover:scale-105 transition duration-700">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-indigo-500 dark:text-indigo-400 mb-3 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            <span class="text-indigo-600 dark:text-indigo-300 font-bold text-lg tracking-wide uppercase bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded backdrop-blur-sm">VoxelByte</span>
+                        </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <span class="w-fit px-2 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 text-[10px] font-bold uppercase rounded-full text-indigo-600 dark:text-indigo-400">Game Engine</span>
@@ -147,8 +168,29 @@
                 </div>
 
                 <div class="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
-                    <div class="aspect-[16/7] overflow-hidden bg-amber-950">
-                         <img src="infinityclimber.png" alt="Infinity Climber Game" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+                    <div class="aspect-[16/7] w-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center relative overflow-hidden group">
+                         
+                        <div class="absolute inset-0 p-4 opacity-10 dark:opacity-20 font-mono text-[10px] leading-tight text-amber-700 dark:text-amber-400 select-none pointer-events-none whitespace-pre-wrap">
+extends KinematicBody
+
+var velocity = Vector3.ZERO
+const GRAVITY = -9.8
+const JUMP_SPEED = 12
+
+func _physics_process(delta):
+    velocity.y += GRAVITY * delta
+    if is_on_floor() and Input.is_action_just_pressed("jump"):
+        velocity.y = JUMP_SPEED
+    move_and_slide(velocity, Vector3.UP)
+                        </div>
+
+                         <div class="relative z-10 flex flex-col items-center justify-center group-hover:scale-105 transition duration-700">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-amber-500 dark:text-amber-400 mb-3 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                             </svg>
+                             <span class="text-amber-600 dark:text-amber-300 font-bold text-lg tracking-wide uppercase bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded backdrop-blur-sm">Infinity Climber</span>
+                        </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <span class="w-fit px-2 py-0.5 bg-amber-50 dark:bg-amber-900/30 text-[10px] font-bold uppercase rounded-full text-amber-600 dark:text-amber-400">3D Game</span>
@@ -167,8 +209,28 @@
                 </div>
 
                 <div class="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
-                    <div class="aspect-[16/7] overflow-hidden bg-emerald-950">
-                         <img src="opticontact.png" alt="OptiContact Algorithms" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+                    <div class="aspect-[16/7] w-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center relative overflow-hidden group">
+                        
+                        <div class="absolute inset-0 p-4 opacity-10 dark:opacity-20 font-mono text-[10px] leading-tight text-emerald-700 dark:text-emerald-400 select-none pointer-events-none whitespace-pre-wrap">
+public class ContactManager {
+    private HashMap<String, Contact> index;
+
+    public Contact search(String key) {
+        // O(1) complexity lookup
+        if (index.containsKey(key)) {
+            return index.get(key);
+        }
+        return null; // Not found
+    }
+}
+                        </div>
+
+                        <div class="relative z-10 flex flex-col items-center justify-center group-hover:scale-105 transition duration-700">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-emerald-500 dark:text-emerald-400 mb-3 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                             </svg>
+                             <span class="text-emerald-600 dark:text-emerald-300 font-bold text-lg tracking-wide uppercase bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded backdrop-blur-sm">OptiContact</span>
+                        </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <span class="w-fit px-2 py-0.5 bg-emerald-50 dark:bg-emerald-900/30 text-[10px] font-bold uppercase rounded-full text-emerald-600 dark:text-emerald-400">Efficiency Engine</span>
@@ -184,8 +246,25 @@
                 </div>
 
                 <div class="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-slate-100 dark:border-slate-700">
-                    <div class="aspect-[16/7] overflow-hidden bg-rose-950">
-                         <img src="rescuedb.png" alt="RescueDB Schema" class="w-full h-full object-cover object-center opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+                    <div class="aspect-[16/7] w-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center relative overflow-hidden group">
+                        
+                        <div class="absolute inset-0 p-4 opacity-10 dark:opacity-20 font-mono text-[10px] leading-tight text-rose-700 dark:text-rose-400 select-none pointer-events-none whitespace-pre-wrap">
+CREATE TABLE rescue_logs (
+    id SERIAL PRIMARY KEY,
+    timestamp TIMESTAMP DEFAULT NOW(),
+    status VARCHAR(50),
+    data JSONB
+);
+-- Optimized Indexing
+CREATE INDEX idx_status ON rescue_logs(status);
+                        </div>
+
+                        <div class="relative z-10 flex flex-col items-center justify-center group-hover:scale-105 transition duration-700">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-rose-500 dark:text-rose-400 mb-3 shadow-sm" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                             </svg>
+                             <span class="text-rose-600 dark:text-rose-300 font-bold text-lg tracking-wide uppercase bg-white/50 dark:bg-slate-900/50 px-3 py-1 rounded backdrop-blur-sm">RescueDB</span>
+                        </div>
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <span class="w-fit px-2 py-0.5 bg-rose-50 dark:bg-rose-900/30 text-[10px] font-bold uppercase rounded-full text-rose-600 dark:text-rose-400">Systems & Storage</span>
